@@ -1,0 +1,119 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+:root {
+  color-scheme: light;
+  --surface: #ffffff;
+  --raised: #ffffff;
+  --ink: #0f1115;
+  --muted: #5f6672;
+  --accent: #16a34a;
+  --line: #e4e6ea;
+}
+
+.dark {
+  color-scheme: dark;
+  --surface: #0f1115;
+  --raised: #1a1d23;
+  --ink: #e8eaed;
+  --muted: #8b9099;
+  --accent: #22c55e;
+  --line: #262a31;
+}
+
+/* Design tokens: use bg-surface, text-ink, text-muted etc. instead of raw values */
+@theme inline {
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-line: var(--line);
+}
+
+@theme {
+  --animate-fill: fill 2s linear infinite;
+  --animate-roulette-frame: roulette-frame 0.5s ease-out 0s both;
+  --animate-roulette-pointer-left: roulette-pointer-left 0.5s ease-out 0.5s both;
+  --animate-roulette-pointer-right: roulette-pointer-right 0.5s ease-out 0.5s both;
+  --animate-roulette-list: roulette-list 1s ease-out 1s both;
+
+  @keyframes roulette-frame {
+    from {
+      opacity: 0;
+      filter: blur(8px);
+      transform: scale(1.2);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: scale(1);
+    }
+  }
+
+  @keyframes roulette-pointer-left {
+    from {
+      opacity: 0;
+      transform: translateX(-12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes roulette-pointer-right {
+    from {
+      opacity: 0;
+      transform: translateX(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes roulette-list {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fill {
+    0%,
+    100% {
+      background-size:
+        0 100%,
+        0 100%,
+        100% 0,
+        100% 0;
+    }
+
+    50% {
+      background-size:
+        55% 100%,
+        55% 100%,
+        100% 0,
+        100% 0;
+    }
+
+    50.01% {
+      background-size:
+        0 100%,
+        0 100%,
+        100% 55%,
+        100% 55%;
+    }
+  }
+}

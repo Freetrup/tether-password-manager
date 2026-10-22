@@ -147,3 +147,10 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# hello-pear-electron
+out/
+todo
+
+# Vite build output (generated from ui/)
+renderer/
