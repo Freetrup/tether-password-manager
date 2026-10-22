@@ -104,6 +104,7 @@ Keys starting with `tetherpass:` are reserved for app metadata, such as the vaul
 - **Passwords are not encrypted by the app.** Values go into Autopass as plain JSON, with no app-level encryption and no master password. I ran out of time to add this. Autopass does not offer it either: it encrypts its logs and replication traffic, but keeps the encryption key in the same storage folder and has no master-password or OS-keychain option. Anyone with a copy of the storage folder can read the vault. The next step is to encrypt each value with a key derived from a master password (for example Argon2 via `sodium-native`) before calling `add`.
 - **Conflicts.** If two devices edit the same password while offline, Autobase keeps one version after they sync; there is no merge or history.
 - **Sharing needs someone online.** Joining only works while at least one member of the vault is running the app.
+- **Desktop only.** The brief asks for a desktop UI, so I did not target mobile: there is no mobile build (the template's `pear-mobile` path is unused) and the layout is designed for desktop window sizes rather than phone screens.
 - **Member management** is read-only in the UI: the member count is shown, but removing a device is not implemented yet.
 - **5% minimum** when it will have more than 20 passwords we should change it to 1% (don't have time for it)
 
