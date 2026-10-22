@@ -95,6 +95,7 @@ Keys starting with `tetherpass:` are reserved for app metadata, such as the vaul
 - **Conflicts.** If two devices edit the same password while offline, Autobase keeps one version after they sync; there is no merge or history.
 - **Sharing needs someone online.** Joining only works while at least one member of the vault is running the app.
 - **Member management** is read-only in the UI: the member count is shown, but removing a device is not implemented yet.
+- **5% minimum** when it will have more than 20 passwords we should change it to 1% (don't have time for it)
 
 ## AI usage
 
