@@ -106,7 +106,7 @@ As the brief allows, I used an AI assistant (Claude) for:
 - **This README**, drafted from the code and edited by me.
 - **commit name** I just love to click this button sorry
 
-The application code is my own: the worker and Autopass integration, the IPC protocol, state management, components, styling, and the roulette feature.
+The application code is my own: the worker and Autopass integration, the IPC protocol, state management, components, styling, and the roulette killer-feature.
 
 ## Killer feature
 
