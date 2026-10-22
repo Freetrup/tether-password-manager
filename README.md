@@ -2,7 +2,7 @@
 
 A peer-to-peer password manager built on [Pear](https://docs.pears.com) and [Autopass](https://github.com/holepunchto/autopass). No server and no accounts: vaults live on your devices and sync directly between them.
 
-**Pear link:** `pear://zmc1uz3cqetqk7dyqcyih5tph39osw8njhxuaxjzmftca9zksshy`
+**Pear link:** `pear://zmc1uz3cqetqk7dyqcyih5tph39osw8njhxuaxjzmftca9zksshy` (staged build: Windows x64 MSIX; see [Pear build](#pear-build)). The simplest way to run it on any OS is [from source](#running-it).
 
 ## Features
 
@@ -57,6 +57,16 @@ Peers find each other through the public Hyperswarm DHT. If they never connect, 
 | `npm run lint`      | Prettier + lunte                                                      |
 | `npm run package`   | Packaged app in `out/`                                                |
 
+### Pear build
+
+The `pear://` link above is the app's Pear OTA channel, with a staged Windows x64 build. To get and install it:
+
+```sh
+pear dump --only /by-arch/win32-x64/app pear://zmc1uz3cqetqk7dyqcyih5tph39osw8njhxuaxjzmftca9zksshy ./tetherpass
+```
+
+The MSIX is signed with a self-signed development certificate (`CN=Igor`, sent along with the submission). Windows will only install it once that certificate is trusted: import `TetherPass-dev-cert.cer` into **Local Machine → Trusted People**, then open `TetherPass.msix`. The link stays available only while it is being seeded.
+
 ## Architecture
 
 Built from the [`hello-pear-electron`](https://github.com/holepunchto/hello-pear-electron) template:
@@ -91,7 +101,7 @@ Keys starting with `tetherpass:` are reserved for app metadata, such as the vaul
 
 ## Known limitations
 
-- **No master password.** Autopass encrypts data in its logs and over the wire, but the encryption key is stored next to the data. Anyone with a copy of the storage folder can read the vault. A master password (encrypting values with a key derived from it) is the obvious next step.
+- **Passwords are not encrypted by the app.** Values go into Autopass as plain JSON, with no app-level encryption and no master password. I ran out of time to add this. Autopass does not offer it either: it encrypts its logs and replication traffic, but keeps the encryption key in the same storage folder and has no master-password or OS-keychain option. Anyone with a copy of the storage folder can read the vault. The next step is to encrypt each value with a key derived from a master password (for example Argon2 via `sodium-native`) before calling `add`.
 - **Conflicts.** If two devices edit the same password while offline, Autobase keeps one version after they sync; there is no merge or history.
 - **Sharing needs someone online.** Joining only works while at least one member of the vault is running the app.
 - **Member management** is read-only in the UI: the member count is shown, but removing a device is not implemented yet.
@@ -120,4 +130,3 @@ I've added a roulette to pick a password to edit, because you should change them
 - **No memo/callbacks** now react compiler can do it in auto mode
 
 - **UX is strange** I have never used such systems in my life so I had no idea what to implement, sorry
-
